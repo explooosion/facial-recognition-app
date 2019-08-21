@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Router } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import './App.scss';
 
@@ -12,14 +12,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router history={createBrowserHistory({ basename: process.env.PUBLIC_URL })}>
+        <HashRouter history={createBrowserHistory({ basename: process.env.PUBLIC_URL })}>
           <div className="route">
             <Route exact path="/" component={Home} />
             <Route exact path="/photo" component={ImageInput} />
             <Route exact path="/camera" component={VideoInput} />
             <Route exact path="/train" component={Train} />
           </div>
-        </Router>
+        </HashRouter>
       </div>
     );
   }
