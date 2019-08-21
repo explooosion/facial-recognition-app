@@ -1,6 +1,16 @@
+# Facial Recognition App
+
+This is a facial reconition app fork from [bnk48-face-recognition](https://github.com/supachaic/bnk48-face-recognition).
+
 ## Demo Page
 
 [Demo App](https://robby570.tw/facial-recognition-app/)
+
+## New Feature
+
+- Add trainning pages
+- Fix JSON type (remove object key by person's name)
+- Fix react warning with new feature 
 
 ## Reference
 
