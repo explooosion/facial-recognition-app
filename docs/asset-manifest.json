@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/facial-recognition-app/static/css/main.848e611f.chunk.css",
+    "main.js": "/facial-recognition-app/static/js/main.0ded8efd.chunk.js",
+    "main.js.map": "/facial-recognition-app/static/js/main.0ded8efd.chunk.js.map",
+    "runtime~main.js": "/facial-recognition-app/static/js/runtime~main.3b6f9df2.js",
+    "runtime~main.js.map": "/facial-recognition-app/static/js/runtime~main.3b6f9df2.js.map",
+    "static/js/2.e733767b.chunk.js": "/facial-recognition-app/static/js/2.e733767b.chunk.js",
+    "static/js/2.e733767b.chunk.js.map": "/facial-recognition-app/static/js/2.e733767b.chunk.js.map",
+    "index.html": "/facial-recognition-app/index.html",
+    "precache-manifest.25fc362e2aed9130c27a8a0469cced57.js": "/facial-recognition-app/precache-manifest.25fc362e2aed9130c27a8a0469cced57.js",
+    "service-worker.js": "/facial-recognition-app/service-worker.js",
+    "static/css/main.848e611f.chunk.css.map": "/facial-recognition-app/static/css/main.848e611f.chunk.css.map",
+    "static/media/test.jpg": "/facial-recognition-app/static/media/test.34e86f06.jpg"
+  }
+}
