@@ -4,7 +4,7 @@ This is a facial reconition app fork from [bnk48-face-recognition](https://githu
 
 ## Demo Page
 
-[Demo App](https://robby570.tw/facial-recognition-app/)
+[Demo App](https://robby570.tw/facial-recognition-app/#/)
 
 ## New Feature
 
