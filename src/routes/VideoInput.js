@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Webcam from 'react-webcam';
@@ -22,7 +23,7 @@ class VideoInput extends Component {
       descriptors: null,
       faceMatcher: null,
       match: null,
-      facingMode: null
+      facingMode: null,
     };
   }
 
@@ -111,14 +112,10 @@ class VideoInput extends Component {
 
         if (match && match[i]) {
           if (_.isNull(this.state.id)) {
-            setTimeout(() => {
-              const jp = JSON_PROFILE.find(j => j.name === match[i]._label);
-              if (!_.isUndefined(jp)) {
-                console.log('jp', jp);
-                this.setState({ id: jp.id });
-                window.open('http://ksi.hsc.nutc.edu.tw/#/user/' + jp.id, '_blank');
-              }
-            }, 4000);
+            const jp = JSON_PROFILE.find(j => j.name === match[i]._label);
+            if (!_.isUndefined(jp)) {
+              this.setState({ id: jp.id });
+            }
           }
         }
 
@@ -166,6 +163,7 @@ class VideoInput extends Component {
           alignItems: 'center'
         }}
       >
+        {_.isNull(this.state.id) ? null : <p><a href={`http://ksi.hsc.nutc.edu.tw/#/user/${this.state.id}`} target='_blank' rel='noopener noreferrer'>{`http://ksi.hsc.nutc.edu.tw/#/user/${this.state.id}`}</a></p>}
         <p>Camera: {camera}</p>
         <div
           style={{
