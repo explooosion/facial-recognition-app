@@ -18,18 +18,21 @@ export async function getFullFaceDescription(blob, inputSize = 512) {
   const useTinyModel = true;
 
   // fetch image to api
-  let img = await faceapi.fetchImage(blob);
-
-  // detect all faces and generate full description from image
-  // including landmark and descriptor of each face
-  let fullDesc = await faceapi
-    .detectAllFaces(img, OPTION)
-    .withFaceLandmarks(useTinyModel)
-    .withFaceDescriptors();
-  return fullDesc;
+  try {
+    const img = await faceapi.fetchImage(blob);
+    // detect all faces and generate full description from image
+    // including landmark and descriptor of each face
+    let fullDesc = await faceapi
+      .detectAllFaces(img, OPTION)
+      .withFaceLandmarks(useTinyModel)
+      .withFaceDescriptors();
+    return fullDesc;
+  } catch (e) {
+    return null;
+  }
 }
 
-const maxDescriptorDistance = 0.5;
+const maxDescriptorDistance = 0.45;
 export async function createMatcher(faceProfile) {
   // Create labeled descriptors of member from profile
   let members = Object.keys(faceProfile);

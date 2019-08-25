@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Webcam from 'react-webcam';
+import _ from 'lodash';
 import { loadModels, getFullFaceDescription, createMatcher } from '../api/face';
 
 // Import face profile
@@ -15,6 +16,7 @@ class VideoInput extends Component {
     super(props);
     this.webcam = React.createRef();
     this.state = {
+      id: null,
       fullDesc: null,
       detections: null,
       descriptors: null,
@@ -59,12 +61,12 @@ class VideoInput extends Component {
   }
 
   capture = async () => {
-    if (!!this.webcam.current) {
+    if (this.webcam.current) {
       await getFullFaceDescription(
         this.webcam.current.getScreenshot(),
         inputSize
       ).then(fullDesc => {
-        if (!!fullDesc) {
+        if (fullDesc) {
           this.setState({
             detections: fullDesc.map(fd => fd.detection),
             descriptors: fullDesc.map(fd => fd.descriptor)
@@ -72,7 +74,7 @@ class VideoInput extends Component {
         }
       });
 
-      if (!!this.state.descriptors && !!this.state.faceMatcher) {
+      if (this.state.descriptors && this.state.faceMatcher) {
         let match = await this.state.descriptors.map(descriptor =>
           this.state.faceMatcher.findBestMatch(descriptor)
         );
@@ -85,7 +87,7 @@ class VideoInput extends Component {
     const { detections, match, facingMode } = this.state;
     let videoConstraints = null;
     let camera = '';
-    if (!!facingMode) {
+    if (facingMode) {
       videoConstraints = {
         width: WIDTH,
         height: HEIGHT,
@@ -99,14 +101,29 @@ class VideoInput extends Component {
     }
 
     let drawBox = null;
-    if (!!detections) {
+    if (detections) {
+
       drawBox = detections.map((detection, i) => {
         let _H = detection.box.height;
         let _W = detection.box.width;
         let _X = detection.box._x;
         let _Y = detection.box._y;
+
+        if (match && match[i]) {
+          if (_.isNull(this.state.id)) {
+            setTimeout(() => {
+              const jp = JSON_PROFILE.find(j => j.name === match[i]._label);
+              if (!_.isUndefined(jp)) {
+                console.log('jp', jp);
+                this.setState({ id: jp.id });
+                window.location.href = 'http://ksi.hsc.nutc.edu.tw/#/user/' + jp.id;
+              }
+            }, 4000);
+          }
+        }
+
         return (
-          <div key={i}>
+          <div key={i} >
             <div
               style={{
                 position: 'absolute',
@@ -118,7 +135,7 @@ class VideoInput extends Component {
                 transform: `translate(${_X}px,${_Y}px)`
               }}
             >
-              {!!match && !!match[i] ? (
+              {match && match[i] ? (
                 <p
                   style={{
                     backgroundColor: 'blue',
@@ -157,7 +174,7 @@ class VideoInput extends Component {
           }}
         >
           <div style={{ position: 'relative', width: WIDTH }}>
-            {!!videoConstraints ? (
+            {videoConstraints ? (
               <div style={{ position: 'absolute' }}>
                 <Webcam
                   audio={false}
@@ -169,7 +186,7 @@ class VideoInput extends Component {
                 />
               </div>
             ) : null}
-            {!!drawBox ? drawBox : null}
+            {drawBox ? drawBox : null}
           </div>
         </div>
       </div>
