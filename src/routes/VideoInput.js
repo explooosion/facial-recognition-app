@@ -116,7 +116,7 @@ class VideoInput extends Component {
               if (!_.isUndefined(jp)) {
                 console.log('jp', jp);
                 this.setState({ id: jp.id });
-                window.location.href = 'http://ksi.hsc.nutc.edu.tw/#/user/' + jp.id;
+                window.open('http://ksi.hsc.nutc.edu.tw/#/user/' + jp.id, '_blank');
               }
             }, 4000);
           }
